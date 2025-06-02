@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 
+const uniqueValidator = require('mongoose-unique-validator')
+
 const userSchema = mongoose.Schema({
-  email: {
-    type: String,
+  email: { 
+    type: String, 
     required: true,
     unique: true, // empêche les doublons d’e-mails
     match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // validation de format d’e-mail
@@ -10,8 +12,9 @@ const userSchema = mongoose.Schema({
   password: {
     type: String,
     required: true,
-    minlength: 6, // exemple : mot de passe d'au moins 6 caractères
   },
 });
+
+userSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('User', userSchema);
