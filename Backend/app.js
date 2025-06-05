@@ -27,9 +27,12 @@ app.use((req, res, next) => {
 });
 //
 
-app.use(bodyParser.json());
-
 app.use('/api/books', booksRoutes);
 app.use('/api/auth', userRoutes);
+
+// Lancer le serveur
+app.listen(4000, () => {
+  console.log('Serveur lancé sur le port 4000');
+});
 
 module.exports = app;

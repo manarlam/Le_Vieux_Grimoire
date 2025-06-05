@@ -1,25 +1,22 @@
 const express = require ('express');
+const auth = require('../middleware/auth');
 const router = express.Router();
+
 
 const booksCtrl = require('../controllers/books')
 
 /* CONFIGURATION DES ROUTES */
 
 // Envoi d'un nouvel objet à l'API
-router.post('/', booksCtrl.createBook);
+router.post('/', auth, booksCtrl.createBook);
 // Modification de l'objet 
-router.put('/:id', booksCtrl.modifyBook);
+router.put('/:id', auth, booksCtrl.modifyBook);
 // Suppression d'un objet
-router.delete ('/:id', booksCtrl.deleteBook);
+router.delete ('/:id', auth, booksCtrl.deleteBook);
 // Recherche de l'ID de l'objet dans le front
-router.get('/:id', booksCtrl.getOneBook);  
+router.get('/:id', auth, booksCtrl.getOneBook);  
 // Affichage des objets crées 
-router.get('/', booksCtrl.getAllBook);
+router.get('/', auth, booksCtrl.getAllBook);
 //
-
-
-router.listen(4000, () => {
-  console.log('Serveur lancé sur le port 4000')
-})
 
 module.exports = router;
