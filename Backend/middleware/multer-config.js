@@ -18,4 +18,5 @@ const storage = multer.diskStorage({
     }
 })
 
+// Gestion des téléchargements d'images
 module.exports = multer({ storage }).single('image');

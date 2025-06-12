@@ -7,6 +7,8 @@ const userRoutes = require('./routes/user');
 
 const app = express();
 
+
+
 // Connexion à MongoDB
 mongoose.connect('mongodb+srv://manlam:N5z5hKwjPGUcN4-@cluster0.9zj4nog.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
   { useNewUrlParser: true,
@@ -26,16 +28,13 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   next();
 });
-//
 
+// Enregistrement des routeurs 
 app.use('/api/books', booksRoutes);
 app.use('/api/auth', userRoutes);
-app.use('/images', express.static(path.join(__dirname, 'images')))
+// Gestion de la ressource images de manière statique
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 
-// Lancer le serveur
-app.listen(4000, () => {
-  console.log('Serveur lancé sur le port 4000');
-});
 
 module.exports = app;

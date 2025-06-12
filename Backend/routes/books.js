@@ -8,19 +8,26 @@ const booksCtrl = require('../controllers/books')
 
 /* CONFIGURATION DES ROUTES */
 
-// Affichage des objets crées 
-router.get('/', booksCtrl.getAllBook);
-// Recherche de l'ID de l'objet dans le front
-router.get('/:id', booksCtrl.getOneBook);  
-// Envoi d'un nouvel objet à l'API
-router.post('/', auth, multer, booksCtrl.createBook);
-// Modification de l'objet 
-router.put('/:id', auth, multer, booksCtrl.modifyBook);
-// Suppression d'un objet
-router.delete ('/:id', auth, booksCtrl.deleteBook);
-// Noter un livre
+// Meilleure note 
+router.get('/bestrating', booksCtrl.getBestRating);
+
+// Noter un livre 
 router.post('/:id/rating', auth, booksCtrl.rateBook);
-// Meilleure note
-router.get('/bestrating', booksCtrl.getBestRatedBooks);
+
+// Affichage de tous les livres
+router.get('/', booksCtrl.getAllBooks);
+
+// Récupération d’un livre par son ID
+router.get('/:id', booksCtrl.getOneBook);
+
+// Création d’un nouveau livre
+router.post('/', auth, multer, booksCtrl.createBook);
+
+// Modification
+router.put('/:id', auth, multer, booksCtrl.modifyBook);
+
+// Suppression
+router.delete('/:id', auth, booksCtrl.deleteBook);
+
 
 module.exports = router;
