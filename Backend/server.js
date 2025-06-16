@@ -13,7 +13,7 @@ const normalizePort = val => {
   }
   return false;
 };
-const port = normalizePort(process.env.PORT || '4000');
+const port = normalizePort(process.env.PORT || '4000'); // Détermination du port
 app.set('port', port);
 
 const errorHandler = error => {
@@ -23,11 +23,11 @@ const errorHandler = error => {
   const address = server.address();
   const bind = typeof address === 'string' ? 'pipe ' + address : 'port: ' + port;
   switch (error.code) {
-    case 'EACCES':
+    case 'EACCES': // Port protégé
       console.error(bind + ' requires elevated privileges.');
       process.exit(1);
       break;
-    case 'EADDRINUSE':
+    case 'EADDRINUSE': // Port déjà utilisé
       console.error(bind + ' is already in use.');
       process.exit(1);
       break;
@@ -36,7 +36,7 @@ const errorHandler = error => {
   }
 };
 
-const server = http.createServer(app);
+const server = http.createServer(app); // Création du serveur 
 
 server.on('error', errorHandler);
 server.on('listening', () => {
@@ -45,4 +45,4 @@ server.on('listening', () => {
   console.log('Listening on ' + bind);
 });
 
-server.listen(port);
+server.listen(port); // Démarrage du serveur 

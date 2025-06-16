@@ -77,7 +77,7 @@ exports.deleteBook = (req, res, next) => {
 
 // Création d'une note
 exports.rateBook = (req, res, next) => {
-  if (0 <= req.body.rating <= 5) {
+  if (req.body.rating >= 0 && req.body.rating <= 5) {
     const ratingBook = { ...req.body, grade: req.body.rating };
     delete ratingBook._id;
     // Récupération du livre pour ajouter une note
